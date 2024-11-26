@@ -1,3 +1,8 @@
+# Membres
+- Mathieu
+- Jonathan
+- Lucky
+
 # Commandes
 
 ## Installation des dépendences
