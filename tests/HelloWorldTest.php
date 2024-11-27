@@ -9,8 +9,9 @@ use App\Entity\Panier;
 use App\Entity\Utilisateur\Admin;
 use App\Entity\Utilisateur\Client;
 use App\Entity\Utilisateur\Vendeur;
-use App\Entity\Config\ConfigurationManager;
-use App\Entity\Factory\ProduitFactory;
+use App\Config\ConfigurationManager;
+use App\Database\DatabaseConnection;
+use App\Factory\ProduitFactory;
 
 class HelloWorldTest extends TestCase
 {
@@ -191,7 +192,7 @@ class HelloWorldTest extends TestCase
         $this->assertEquals("€", $config->get("devise"));
         $this->assertEquals(5.99, $config->get("frais_de_livraison_de_base"));
         $this->assertEquals("contact@mon-domaine.fr", $config->get("email_de_contact"));
-
+       
         echo "✅ test : Configuration Manager\n";
     }
 
@@ -267,5 +268,21 @@ class HelloWorldTest extends TestCase
         $this->assertEquals(6, $produitPerissable->getStock());
 
         echo "✅ test : Factory - Ajout de produit périssable\n";
+    }
+
+
+
+    // ***********************
+    // BASE DE DONNÉES
+    // ***********************
+    // Teste la connexion à la base de données
+    public function testConnexionBaseDeDonnees()
+    {
+        $db = DatabaseConnection::getInstance();
+        $pdo = $db->connect();
+
+        $this->assertInstanceOf(PDO::class, $pdo);
+
+        echo "✅ test : Connexion à la base de données\n";
     }
 }

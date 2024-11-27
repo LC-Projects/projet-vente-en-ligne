@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Entity\Produit;
 
-use App\Entity\Config\ConfigurationManager;
+use App\Config\ConfigurationManager;
 use DateTime;
 use InvalidArgumentException;
 

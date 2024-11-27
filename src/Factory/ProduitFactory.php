@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Factory;
+namespace App\Factory;
 use App\Entity\Produit\Produit;
 use App\Entity\Produit\ProduitNumerique;
 use App\Entity\Produit\ProduitPerissable;
