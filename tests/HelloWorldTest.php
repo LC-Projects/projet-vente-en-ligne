@@ -12,6 +12,7 @@ use App\Entity\Utilisateur\Vendeur;
 use App\Config\ConfigurationManager;
 use App\Database\DatabaseConnection;
 use App\Factory\ProduitFactory;
+use App\Repository\ProduitRepository;
 
 class HelloWorldTest extends TestCase
 {
@@ -284,5 +285,44 @@ class HelloWorldTest extends TestCase
         $this->assertInstanceOf(PDO::class, $pdo);
 
         echo "✅ test : Connexion à la base de données\n";
+    }
+    // Teste l'ajout d'un produit dans la base de données
+    public function testAjouterProduitDansBaseDeDonnees()
+    {
+        $produit = new ProduitFactory;
+        $produitPhysique = $produit->creerProduit("physique", [
+            'nom' => "Laptop",
+            'prix' => 999.99,
+            'description' => "Un super laptop",
+            'poids' => 2.0,
+            'stock' => 5,
+            'longueur' => 0.5,
+            'largeur' => 15.6,
+            'hauteur' => 2.0,
+        ]);
+
+        $produitRepository = new ProduitRepository();
+        $produitRepository->create([
+            'nom' => $produitPhysique->getNom(),
+            'description' => $produitPhysique->getDescription(),
+            'prix' => $produitPhysique->getPrix(),
+            'stock' => $produitPhysique->getStock(),
+            'type' => 'physique',
+            'poids' => $produitPhysique->getPoids(),
+            'longueur' => $produitPhysique->getLongueur(),
+            'largeur' => $produitPhysique->getLargeur(),
+            'hauteur' => $produitPhysique->getHauteur(),
+        ]);
+
+        $sql = "SELECT * FROM produit WHERE nom = 'Laptop'";
+        $db = DatabaseConnection::getInstance()->connect()->query($sql);
+        $produit = $db->fetch();
+
+        $this->assertEquals("Laptop", $produit['nom']);
+        $this->assertEquals(999.99, $produit['prix']);
+        $this->assertEquals("Un super laptop", $produit['description']);
+        $this->assertEquals(5, $produit['stock']);
+
+        echo "✅ test : Ajout de produit dans la base de données\n";
     }
 }

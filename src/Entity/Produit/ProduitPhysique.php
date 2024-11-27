@@ -53,6 +53,16 @@ class ProduitPhysique extends Produit
     }
 
     /**
+     * Retourne le poids du produit.
+     * 
+     * @return float
+     */
+    public function getPoids(): float
+    {
+        return $this->poids;
+    }
+
+    /**
      * Définit la longueur du produit.
      * 
      * @param float $longueur
@@ -64,6 +74,16 @@ class ProduitPhysique extends Produit
             throw new InvalidArgumentException("La longueur doit être positive.");
         }
         $this->longueur = $longueur;
+    }
+
+    /**
+     * Retourne la longueur du produit.
+     * 
+     * @return float
+     */
+    public function getLongueur(): float
+    {
+        return $this->longueur;
     }
 
     /**
@@ -81,6 +101,16 @@ class ProduitPhysique extends Produit
     }
 
     /**
+     * Retourne la largeur du produit.
+     * 
+     * @return float
+     */
+    public function getLargeur(): float
+    {
+        return $this->largeur;
+    }
+
+    /**
      * Définit la hauteur du produit.
      * 
      * @param float $hauteur
@@ -92,6 +122,16 @@ class ProduitPhysique extends Produit
             throw new InvalidArgumentException("La hauteur doit être positive.");
         }
         $this->hauteur = $hauteur;
+    }
+
+    /**
+     * Retourne la hauteur du produit.
+     * 
+     * @return float
+     */
+    public function getHauteur(): float
+    {
+        return $this->hauteur;
     }
 
     /**

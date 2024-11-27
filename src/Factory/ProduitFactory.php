@@ -20,10 +20,10 @@ class ProduitFactory
      * 
      * @param string $type
      * @param array $data
-     * @return Produit
+     * @return Produit | ProduitNumerique | ProduitPhysique | ProduitPerissable
      * @throws InvalidArgumentException
      */
-    public function creerProduit(string $type, array $data): Produit
+    public function creerProduit(string $type, array $data): ProduitNumerique | ProduitPhysique | ProduitPerissable
     {
         switch ($type) {
             case "numerique":
