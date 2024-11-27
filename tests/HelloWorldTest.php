@@ -48,8 +48,8 @@ class HelloWorldTest extends TestCase
     // Teste la création d'un produit périssable
     public function testCreationDeProduitPerissable()
     {
-        $expirationDate = new DateTime('2023-12-31');
-        $produitPerissable = new ProduitPerissable("Lait", 1.99, "Un litre de lait", 6, $expirationDate, 3, 2);
+        $expirationDate = new DateTime('2026-12-31');
+        $produitPerissable = new ProduitPerissable("Lait", 1.99, "Un litre de lait", 6, $expirationDate, 2);
 
         $this->assertInstanceOf(ProduitPerissable::class, $produitPerissable);
         // $this->assertEquals(3, $produitPerissable->getId());
@@ -250,7 +250,7 @@ class HelloWorldTest extends TestCase
     public function testFactoryAjouterProduitPerissable()
     {
         $produit = new ProduitFactory;
-        $expirationDate = new DateTime('2023-12-31');
+        $expirationDate = new DateTime('2026-12-31');
         $produitPerissable = $produit->creerProduit("perissable", [
             'nom' => "Lait",
             'prix' => 1.99,

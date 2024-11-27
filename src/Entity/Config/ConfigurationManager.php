@@ -29,10 +29,11 @@ class ConfigurationManager {
 
     public static function getInstance(): ConfigurationManager {
         if (self::$instance === null) {
-            self::$instance = new ConfigurationManager();
+            self::$instance = new self();
         }
         return self::$instance;
     }
+
 
     public function get(string $key) {
         if (!array_key_exists($key, $this->config)) {

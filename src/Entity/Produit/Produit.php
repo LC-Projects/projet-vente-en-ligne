@@ -13,7 +13,7 @@ use InvalidArgumentException;
  * @property string $description Description du produit
  * @property int $stock Stock du produit
  */
-class Produit
+abstract class Produit
 {
     private $id;
     private $nom;
@@ -109,6 +109,8 @@ class Produit
     {
         if (empty($nom)) {
             throw new InvalidArgumentException("Le nom ne doit pas être vide.");
+        } elseif (!is_string($nom)) {
+            throw new InvalidArgumentException("Le nom doit être une chaîne de caractères.");
         }
         $this->nom = $nom;
     }
@@ -123,6 +125,8 @@ class Produit
     {
         if ($prix <= 0) {
             throw new InvalidArgumentException("Le prix doit être positif.");
+        } elseif (!is_float($prix)) {
+            throw new InvalidArgumentException("Le prix doit être un nombre décimal.");
         }
         $this->prix = $prix;
     }
@@ -147,6 +151,8 @@ class Produit
     {
         if ($stock < 0) {
             throw new InvalidArgumentException("Le stock doit être positif ou nul.");
+        } elseif (!is_int($stock)) {
+            throw new InvalidArgumentException("Le stock doit être un entier.");
         }
         $this->stock = $stock;
     }

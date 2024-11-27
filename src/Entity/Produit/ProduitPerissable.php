@@ -4,6 +4,7 @@ namespace App\Entity\Produit;
 
 use App\Entity\Config\ConfigurationManager;
 use DateTime;
+use InvalidArgumentException;
 
 /**
  * Classe représentant un produit périssable
@@ -27,7 +28,37 @@ class ProduitPerissable extends Produit
     public function __construct(string $nom, float $prix, string $description, int $stock, DateTime $dateExpiration, float $temperatureStockage)
     {
         parent::__construct($nom, $prix, $description, $stock);
+        $this->setDateExpiration($dateExpiration);
+        $this->setTemperatureStockage($temperatureStockage);
+    }
+
+
+    /**
+     * Définit la date d'expiration du produit.
+     * 
+     * @param DateTime $dateExpiration
+     * @throws InvalidArgumentException
+     */
+    public function setDateExpiration(DateTime $dateExpiration): void
+    {
+        $now = new DateTime();
+        if ($dateExpiration < $now) {
+            throw new InvalidArgumentException("La date d'expiration doit être postérieure à la date actuelle.");
+        }
         $this->dateExpiration = $dateExpiration;
+    }
+
+    /**
+     * Définit la température de stockage du produit.
+     * 
+     * @param float $temperatureStockage
+     * @throws InvalidArgumentException
+     */
+    public function setTemperatureStockage(float $temperatureStockage): void
+    {
+        if ($temperatureStockage < ConfigurationManager::getInstance()->get("temperature_stockage_minimale") || $temperatureStockage > ConfigurationManager::getInstance()->get("temperature_stockage_maximale")) {
+            throw new InvalidArgumentException("La température de stockage doit être comprise entre " . ConfigurationManager::getInstance()->get("temperature_stockage_minimale") . "°C et " . ConfigurationManager::getInstance()->get("temperature_stockage_maximale") . "°C.");
+        }
         $this->temperatureStockage = $temperatureStockage;
     }
 
