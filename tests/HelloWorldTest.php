@@ -185,7 +185,7 @@ class HelloWorldTest extends TestCase
     // ***********************
     public function testConfigurationManager()
     {
-        $config = new ConfigurationManager();
+        $config = ConfigurationManager::getInstance();
 
         $this->assertEquals(0.2, $config->get("tva"));
         $this->assertEquals("€", $config->get("devise"));
