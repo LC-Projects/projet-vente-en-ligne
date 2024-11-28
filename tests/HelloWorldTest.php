@@ -12,6 +12,7 @@ use App\Entity\Utilisateur\Vendeur;
 use App\Config\ConfigurationManager;
 use App\Database\DatabaseConnection;
 use App\Factory\ProduitFactory;
+use App\Repository\CategorieRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\UtilisateurRepository;
 
@@ -408,7 +409,7 @@ class HelloWorldTest extends TestCase
     }
 
     // -----------------------
-    // UTILISATEURS
+    // UTILISATEURS : Client
     // -----------------------
     // Teste l'ajout d'un utilisateur dans la base de données
     public function testAjouterUtilisateurDansBaseDeDonnees()
@@ -490,7 +491,6 @@ class HelloWorldTest extends TestCase
 
         echo "✅ test : Lecture de tous les utilisateurs dans la base de données\n";
     }
-
     // Teste la suppression d'un utilisateur dans la base de données
     public function testSupprimerUtilisateurDansBaseDeDonnees()
     {
@@ -513,6 +513,97 @@ class HelloWorldTest extends TestCase
     }
 
 
+    // ***********************
+    // CATEGORIE
+    // ***********************
+    // Teste la création d'une catégorie
+    public function testCreationCategorie()
+    {
+        $categorieRepository = new CategorieRepository();
+        $categorieRepository->create([
+            'nom' => 'Informatique',
+            'description' => 'Produits informatiques'
+        ]);
+
+        $categorie = $categorieRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0];
+
+        $this->assertEquals("Informatique", $categorie['nom']);
+        $this->assertEquals("Produits informatiques", $categorie['description']);
+
+        echo "✅ test : Creation de categorie\n";
+    }
+    // Teste la lecture d'une catégorie
+    public function testLireCategorie()
+    {
+        $categorieRepository = new CategorieRepository();
+        $lastId = $categorieRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        $categorie = $categorieRepository->read((int) $lastId);
+
+        $this->assertEquals("Informatique", $categorie->getNom());
+        $this->assertEquals("Produits informatiques", $categorie->getDescription());
+
+        echo "✅ test : Lecture de categorie\n";
+    }
+    // Teste la mise à jour d'une catégorie
+    public function testMettreAJourCategorie()
+    {
+        $categorieRepository = new CategorieRepository();
+        $lastId = $categorieRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        $categorie = $categorieRepository->read((int) $lastId);
+
+        // Mettre à jour la catégorie
+        $categorie->setNom("Electronique");
+        $categorieRepository->update($categorie);
+
+        // Tester les valeurs après la mise à jour
+        $categorie = $categorieRepository->read((int) $lastId);
+        $this->assertEquals("Electronique", $categorie->getNom());
+        $this->assertEquals("Produits informatiques", $categorie->getDescription());
+
+        echo "✅ test : Mise à jour de categorie\n";
+    }
+    // Teste findAll dans la base de données
+    public function testLireToutesLesCategories()
+    {
+        $categorieRepository = new CategorieRepository();
+        $categories = $categorieRepository->findAll();
+
+        $this->assertIsArray($categories);
+        $this->assertNotEmpty($categories);
+
+        echo "✅ test : Lecture de toutes les categories\n";
+    }
+    // Teste la suppression d'une catégorie
+    public function testSupprimerCategorie()
+    {
+        $categorieRepository = new CategorieRepository();
+
+        // Récupérer le dernier ID
+        $lastId = (int) $categorieRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        // Supprimer la catégorie
+        $categorieRepository->delete($lastId);
+
+        // Tester si la catégorie a été supprimée
+        $categorie = $categorieRepository->read($lastId);
+        $this->assertEmpty($categorie);
+
+        echo "✅ test : Suppression de categorie\n";
+    }
 
 
 

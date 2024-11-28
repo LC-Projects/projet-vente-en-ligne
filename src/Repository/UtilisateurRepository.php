@@ -9,7 +9,6 @@ use App\Entity\Panier;
 use App\Entity\Utilisateur\Admin;
 use App\Entity\Utilisateur\Client;
 use PDO;
-use App\Entity\Utilisateur\Utilisateur;
 use App\Entity\Utilisateur\Vendeur;
 use DateTime;
 use Exception;

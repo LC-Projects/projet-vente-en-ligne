@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Entity\Categorie;
+namespace App\Entity;
 use App\Entity\Produit\Produit;
+use InvalidArgumentException;
 
 /**
  * Classe représentant une catégorie de produits
@@ -26,9 +27,8 @@ class Categorie
      * @param string $nom
      * @param string $description
      */
-    public function __construct(int $id, string $nom, string $description)
+    public function __construct(string $nom, string $description)
     {
-        $this->id = $id;
         $this->nom = $nom;
         $this->description = $description;
         $this->produits = [];
@@ -73,6 +73,16 @@ class Categorie
     }
 
     /**
+     * Définit l'ID de la catégorie.
+     * 
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * Retourne l'ID de la catégorie.
      * 
      * @return int
@@ -83,6 +93,22 @@ class Categorie
     }
 
     /**
+     * Définit le nom de la catégorie.
+     * 
+     * @param string $nom
+     * @throws InvalidArgumentException
+     */
+    public function setNom(string $nom): void
+    {
+        if (empty($nom)) {
+            throw new InvalidArgumentException("Le nom de la catégorie ne peut pas être vide.");
+        } elseif (strlen($nom) > 50) {
+            throw new InvalidArgumentException("Le nom de la catégorie ne peut pas dépasser 50 caractères.");
+        }
+        $this->nom = $nom;
+    }
+
+    /**
      * Retourne le nom de la catégorie.
      * 
      * @return string
@@ -90,6 +116,22 @@ class Categorie
     public function getNom(): string
     {
         return $this->nom;
+    }
+
+    /**
+     * Définit la description de la catégorie.
+     * 
+     * @param string $description
+     * @throws InvalidArgumentException
+     */
+    public function setDescription(string $description): void
+    {
+        if (empty($description)) {
+            throw new InvalidArgumentException("La description de la catégorie ne peut pas être vide.");
+        } elseif (strlen($description) > 255) {
+            throw new InvalidArgumentException("La description de la catégorie ne peut pas dépasser 255 caractères.");
+        }
+        $this->description = $description;
     }
 
     /**
