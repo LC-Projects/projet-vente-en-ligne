@@ -287,6 +287,7 @@ class HelloWorldTest extends TestCase
         echo "✅ test : Connexion à la base de données\n";
     }
     // Teste l'ajout d'un produit dans la base de données
+    // TODO: DECOMMENTER POUR TESTER
     public function testAjouterProduitDansBaseDeDonnees()
     {
         $produit = new ProduitFactory;
@@ -324,5 +325,70 @@ class HelloWorldTest extends TestCase
         $this->assertEquals(5, $produit['stock']);
 
         echo "✅ test : Ajout de produit dans la base de données\n";
+    }
+    
+    // Teste la lecture d'un produit dans la base de données
+    public function testLireProduitDansBaseDeDonnees()
+    {
+        $produitRepository = new ProduitRepository();
+        $lastId = $produitRepository->findBy([
+            // "search" => "1",
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        $produit = $produitRepository->read((int) $lastId);
+
+        $this->assertEquals("Laptop", $produit->getNom());
+        $this->assertEquals(999.99, $produit->getPrix());
+        $this->assertEquals("Un super laptop", $produit->getDescription());
+        $this->assertEquals(5, $produit->getStock());
+
+        echo "✅ test : Lecture de produit dans la base de données\n";
+    }
+
+    // Teste la mise à jour d'un produit dans la base de données
+    public function testMettreAJourProduitDansBaseDeDonnees()
+    {
+        $produitRepository = new ProduitRepository();
+        $lastId = $produitRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        $produit = $produitRepository->read((int) $lastId);
+
+        // Mettre à jour le produit
+        $produit->setNom("Banane");
+        $produitRepository->update($produit);
+
+        // Tester les valeurs après la mise à jour
+        $produit = $produitRepository->read((int) $lastId);
+        $this->assertEquals("Banane", $produit->getNom());
+        $this->assertEquals(999.99, $produit->getPrix());
+        $this->assertEquals("Un super laptop", $produit->getDescription());
+        $this->assertEquals(5, $produit->getStock());
+
+        echo "✅ test : Mise à jour de produit dans la base de données\n";
+    }
+    // Teste la suppression d'un produit dans la base de données
+    public function testSupprimerProduitDansBaseDeDonnees()
+    {
+        $produitRepository = new ProduitRepository();
+
+        // Récupérer le dernier ID
+        $lastId = (int) $produitRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        // Supprimer le produit
+        $produitRepository->delete($lastId);
+
+        // Tester si le produit a été supprimé
+        $produit = $produitRepository->read($lastId);
+        $this->assertEmpty($produit);
+
+        echo "✅ test : Suppression de produit dans la base de données\n";
     }
 }

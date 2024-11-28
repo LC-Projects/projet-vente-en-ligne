@@ -15,6 +15,7 @@ use InvalidArgumentException;
  */
 abstract class Produit
 {
+    private $type;
     private $id;
     private $nom;
     private $prix;
@@ -156,6 +157,28 @@ abstract class Produit
         }
         $this->stock = $stock;
     }
+
+    /**
+     * Retourne le type du produit.
+     * 
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * Définit le type du produit.
+     * 
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+
 
     /**
      * Calcule le prix TTC du produit.

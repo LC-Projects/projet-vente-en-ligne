@@ -51,6 +51,16 @@ class ProduitNumerique extends Produit
     }
 
     /**
+     * Retourne le lien de téléchargement du produit.
+     * 
+     * @return string
+     */
+    public function getLienTelechargement(): string
+    {
+        return $this->lienTelechargement;
+    }
+
+    /**
      * Définit la taille du fichier du produit.
      * 
      * @param float $tailleFichier
@@ -63,6 +73,16 @@ class ProduitNumerique extends Produit
             throw new InvalidArgumentException("La taille du fichier doit être supérieure à 0.");
         }
         $this->tailleFichier = $tailleFichier;
+    }
+
+    /**
+     * Retourne la taille du fichier du produit.
+     * 
+     * @return float
+     */
+    public function getTailleFichier(): float
+    {
+        return $this->tailleFichier;
     }
 
     /**
@@ -80,6 +100,16 @@ class ProduitNumerique extends Produit
             throw new InvalidArgumentException("Le format du fichier ne peut pas dépasser 10 caractères.");
         }
         $this->formatFichier = $formatFichier;
+    }
+
+    /**
+     * Retourne le format du fichier du produit.
+     * 
+     * @return string
+     */
+    public function getFormatFichier(): string
+    {
+        return $this->formatFichier;
     }
 
     /**

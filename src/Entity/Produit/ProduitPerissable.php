@@ -63,6 +63,26 @@ class ProduitPerissable extends Produit
     }
 
     /**
+     * Retourne la température de stockage du produit.
+     * 
+     * @return float
+     */
+    public function getTemperatureStockage(): float
+    {
+        return $this->temperatureStockage;
+    }
+
+    /**
+     * Retourne la date d'expiration du produit.
+     * 
+     * @return DateTime
+     */
+    public function getDateExpiration(): DateTime
+    {
+        return $this->dateExpiration;
+    }
+
+    /**
      * Vérifie si le produit est périmé par rapport à la date actuelle.
      * 
      * @return bool
