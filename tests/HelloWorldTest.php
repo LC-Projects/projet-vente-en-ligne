@@ -13,6 +13,7 @@ use App\Config\ConfigurationManager;
 use App\Database\DatabaseConnection;
 use App\Factory\ProduitFactory;
 use App\Repository\ProduitRepository;
+use App\Repository\UtilisateurRepository;
 
 class HelloWorldTest extends TestCase
 {
@@ -286,8 +287,10 @@ class HelloWorldTest extends TestCase
 
         echo "✅ test : Connexion à la base de données\n";
     }
+    // -----------------------
+    // PRODUITS
+    // -----------------------
     // Teste l'ajout d'un produit dans la base de données
-    // TODO: DECOMMENTER POUR TESTER
     public function testAjouterProduitDansBaseDeDonnees()
     {
         $produit = new ProduitFactory;
@@ -315,9 +318,10 @@ class HelloWorldTest extends TestCase
             'hauteur' => $produitPhysique->getHauteur(),
         ]);
 
-        $sql = "SELECT * FROM produit WHERE nom = 'Laptop'";
-        $db = DatabaseConnection::getInstance()->connect()->query($sql);
-        $produit = $db->fetch();
+        $produit = $produitRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0];
 
         $this->assertEquals("Laptop", $produit['nom']);
         $this->assertEquals(999.99, $produit['prix']);
@@ -371,6 +375,17 @@ class HelloWorldTest extends TestCase
 
         echo "✅ test : Mise à jour de produit dans la base de données\n";
     }
+    // Teste findAll dans la base de données
+    public function testLireTousLesProduitsDansBaseDeDonnees()
+    {
+        $produitRepository = new ProduitRepository();
+        $produits = $produitRepository->findAll();
+
+        $this->assertIsArray($produits);
+        $this->assertNotEmpty($produits);
+
+        echo "✅ test : Lecture de tous les produits dans la base de données\n";
+    }
     // Teste la suppression d'un produit dans la base de données
     public function testSupprimerProduitDansBaseDeDonnees()
     {
@@ -391,4 +406,114 @@ class HelloWorldTest extends TestCase
 
         echo "✅ test : Suppression de produit dans la base de données\n";
     }
+
+    // -----------------------
+    // UTILISATEURS
+    // -----------------------
+    // Teste l'ajout d'un utilisateur dans la base de données
+    public function testAjouterUtilisateurDansBaseDeDonnees()
+    {
+        // ClientRepository
+        $utilisateurRepository = new UtilisateurRepository();
+
+        // Ajouter l'utilisateur dans la base de données
+        $utilisateurRepository->create([
+            'nom' => 'bon',
+            'email' => 'jean.bon@mon-domaine.fr',
+            'motDePasse' => 'jeanbon123456',
+            'type' => 'client',
+            'adresseLivraison' => "",
+            'boutique' => "",
+            'commission' => 1,
+            'niveauAcces' => 1,
+            'derniereConnexion' => null
+        ]);
+
+        // Récupérer l'utilisateur
+        $utilisateur = $utilisateurRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0];
+
+        // Tester les valeurs
+        $this->assertEquals("bon", $utilisateur['nom']);
+        $this->assertEquals("jean.bon@mon-domaine.fr", $utilisateur['email']);
+
+        echo "✅ test : Ajout d'utilisateur dans la base de données\n";
+    }
+    // Teste la lecture d'un utilisateur dans la base de données
+    public function testLireUtilisateurDansBaseDeDonnees()
+    {
+        $utilisateurRepository = new UtilisateurRepository();
+        $lastId = $utilisateurRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        $utilisateur = $utilisateurRepository->read((int) $lastId);
+
+        $this->assertEquals("bon", $utilisateur->getNom());
+        $this->assertEquals("jean.bon@mon-domaine.fr", $utilisateur->getEmail());
+
+        echo "✅ test : Lecture d'utilisateur dans la base de données\n";
+    }
+    // Teste la mise à jour d'un utilisateur dans la base de données
+    public function testMettreAJourUtilisateurDansBaseDeDonnees()
+    {
+        $utilisateurRepository = new UtilisateurRepository();
+        $lastId = $utilisateurRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        $utilisateur = $utilisateurRepository->read((int) $lastId);
+
+        // Mettre à jour l'utilisateur
+        $utilisateur->setNom("Dupont");
+        $utilisateurRepository->update($utilisateur);
+
+        // Tester les valeurs après la mise à jour
+        $utilisateur = $utilisateurRepository->read((int) $lastId);
+        $this->assertEquals("Dupont", $utilisateur->getNom());
+        $this->assertEquals("jean.bon@mon-domaine.fr", $utilisateur->getEmail());
+
+        echo "✅ test : Mise à jour d'utilisateur dans la base de données\n";
+    }
+    // Teste findAll dans la base de données
+    public function testLireTousLesUtilisateursDansBaseDeDonnees()
+    {
+        $utilisateurRepository = new UtilisateurRepository();
+        $utilisateurs = $utilisateurRepository->findAll();
+
+        $this->assertIsArray($utilisateurs);
+        $this->assertNotEmpty($utilisateurs);
+
+        echo "✅ test : Lecture de tous les utilisateurs dans la base de données\n";
+    }
+
+    // Teste la suppression d'un utilisateur dans la base de données
+    public function testSupprimerUtilisateurDansBaseDeDonnees()
+    {
+        $utilisateurRepository = new UtilisateurRepository();
+
+        // Récupérer le dernier ID
+        $lastId = (int) $utilisateurRepository->findBy([
+            "order" => "id DESC",
+            "limit" => 1
+        ])[0]['id'];
+
+        // Supprimer l'utilisateur
+        $utilisateurRepository->delete($lastId);
+
+        // Tester si l'utilisateur a été supprimé
+        $utilisateur = $utilisateurRepository->read($lastId);
+        $this->assertEmpty($utilisateur);
+
+        echo "✅ test : Suppression d'utilisateur dans la base de données\n";
+    }
+
+
+
+
+
 }

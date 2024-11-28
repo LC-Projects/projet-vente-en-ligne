@@ -39,35 +39,39 @@ class ProduitRepository
      */
     public function create(array $produit): void
     {
-        $sql = "INSERT INTO produit (
-                    nom, description, prix, stock, type, 
-                    poids, longueur, largeur, hauteur, 
-                    lienTelechargement, tailleFichier, formatFichier, 
-                    dateExpiration, temperatureStockage, categorie_id
-                ) VALUES (
-                    :nom, :description, :prix, :stock, :type, 
-                    :poids, :longueur, :largeur, :hauteur, 
-                    :lienTelechargement, :tailleFichier, :formatFichier, 
-                    :dateExpiration, :temperatureStockage, :categorie_id
-                )";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
-            ':nom' => $produit['nom'],
-            ':description' => $produit['description'] ?? null,
-            ':prix' => $produit['prix'],
-            ':stock' => $produit['stock'],
-            ':type' => $produit['type'],
-            ':poids' => $produit['poids'] ?? null,
-            ':longueur' => $produit['longueur'] ?? null,
-            ':largeur' => $produit['largeur'] ?? null,
-            ':hauteur' => $produit['hauteur'] ?? null,
-            ':lienTelechargement' => $produit['lienTelechargement'] ?? null,
-            ':tailleFichier' => $produit['tailleFichier'] ?? null,
-            ':formatFichier' => $produit['formatFichier'] ?? null,
-            ':dateExpiration' => $produit['dateExpiration'] ?? null,
-            ':temperatureStockage' => $produit['temperatureStockage'] ?? null,
-            ':categorie_id' => $produit['categorie_id'] ?? null,
-        ]);
+        try {
+            $sql = "INSERT INTO produit (
+            nom, description, prix, stock, type, 
+            poids, longueur, largeur, hauteur, 
+            lienTelechargement, tailleFichier, formatFichier, 
+            dateExpiration, temperatureStockage, categorie_id
+        ) VALUES (
+            :nom, :description, :prix, :stock, :type, 
+            :poids, :longueur, :largeur, :hauteur, 
+            :lienTelechargement, :tailleFichier, :formatFichier, 
+            :dateExpiration, :temperatureStockage, :categorie_id
+        )";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':nom' => $produit['nom'],
+                ':description' => $produit['description'] ?? null,
+                ':prix' => $produit['prix'],
+                ':stock' => $produit['stock'],
+                ':type' => $produit['type'],
+                ':poids' => $produit['poids'] ?? null,
+                ':longueur' => $produit['longueur'] ?? null,
+                ':largeur' => $produit['largeur'] ?? null,
+                ':hauteur' => $produit['hauteur'] ?? null,
+                ':lienTelechargement' => $produit['lienTelechargement'] ?? null,
+                ':tailleFichier' => $produit['tailleFichier'] ?? null,
+                ':formatFichier' => $produit['formatFichier'] ?? null,
+                ':dateExpiration' => $produit['dateExpiration'] ?? null,
+                ':temperatureStockage' => $produit['temperatureStockage'] ?? null,
+                ':categorie_id' => $produit['categorie_id'] ?? null,
+            ]);
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     /**
@@ -247,7 +251,7 @@ class ProduitRepository
             $sql = "SELECT * FROM produit";
             // search criteria
             if (isset($criteria['search'])) {
-                $sql .=  "WHERE " . implode(" AND ", array_map(fn($key) => "$key = :$key", array_keys($criteria['criteria'])));
+                $sql .=  " WHERE " . implode(" AND ", array_map(fn($key) => "$key = :$key", array_keys($criteria['criteria'])));
             }
             // order
             if (isset($criteria['order'])) {
