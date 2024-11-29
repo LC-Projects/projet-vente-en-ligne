@@ -3,20 +3,24 @@
 namespace App\Controller;
 
 use App\Repository\ProduitRepository;
+use App\Repository\CategorieRepository;
 
 class ProduitController
 {
     const ROOT = __DIR__ . '/../../';
     private $produitRepository;
+    private $CategorieRepository;
 
     public function __construct()
     {
         $this->produitRepository = new ProduitRepository();
+        $this->CategorieRepository = new CategorieRepository();
     }
 
     public function afficherListeProduits()
     {
         $produits = $this->produitRepository->findAll();
+        $categories = $this->CategorieRepository->findAll();
         include self::ROOT . 'src/View/Produits/list.php';
     }
 
