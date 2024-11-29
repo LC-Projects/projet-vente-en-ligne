@@ -6,14 +6,16 @@ use App\Controller\ProduitController;
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-if ('/produits' === $uri) {
+if ('/' === $uri) {
     $controller = new ProduitController();
     $controller->afficherListeProduits();
-} elseif (preg_match('/^\/produit\/(\d+)$/', $uri, $matches)) {
+} elseif ('/produit' === $uri && isset($_GET['id'])) {
     $controller = new ProduitController();
-    $controller->afficherProduit($matches[1]);
+    $controller->afficherProduit($_GET['id']);
 } else {
-    echo "404 Not Found";
+    header('HTTP/1.1 404 Not Found');
+    echo '<html><body><h1>Page Not Found</h1></body></html>';
 }
 
 ?>
+
