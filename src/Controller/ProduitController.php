@@ -17,12 +17,12 @@ class ProduitController
     public function afficherListeProduits()
     {
         $produits = $this->produitRepository->findAll();
-        include self::ROOT . 'src/View/produits.php';
+        include self::ROOT . 'src/View/Produits/list.php';
     }
 
     public function afficherProduit($id)
     {
-        $produit = $this->produitRepository->findBy(['search' => ['id' => $id]]);
-        include __DIR__ . '/../View/produit.php';
+        $produit = $this->produitRepository->findBy(['search' => ['id' => $id]])[0];
+        include self::ROOT . 'src/View/Produits/detail.php';
     }
 }
