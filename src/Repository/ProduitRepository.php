@@ -74,6 +74,7 @@ class ProduitRepository
         }
     }
 
+
     /**
      * Read a product.
      * 
@@ -116,6 +117,7 @@ class ProduitRepository
             throw new Exception($e->getMessage());
         }
     }
+
 
     /**
      * Update a product.
@@ -251,7 +253,7 @@ class ProduitRepository
             $sql = "SELECT * FROM produit";
             // search criteria
             if (isset($criteria['search'])) {
-                $sql .=  " WHERE " . implode(" AND ", array_map(fn($key) => "$key = :$key", array_keys($criteria['criteria'])));
+                $sql .=  " WHERE " . implode(" AND ", array_map(fn($key) => "$key = :$key", array_keys($criteria['search'])));
             }
             // order
             if (isset($criteria['order'])) {

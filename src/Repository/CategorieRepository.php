@@ -10,16 +10,30 @@ use PDO;
 use PDOException;
 use Exception;
 
+
+/**
+ * Class CategorieRepository
+ * @package App\Repository
+ */
 class CategorieRepository
 {
 
     private $pdo;
 
+
+    /**
+     * CategorieRepository constructor.
+     */
     public function __construct()
     {
         $this->pdo = DatabaseConnection::getInstance()->connect();
     }
 
+
+    /**
+     * @param array $categorie
+     * @throws PDOException
+     */
     public function create(array $categorie): void
     {
         try {
@@ -34,6 +48,12 @@ class CategorieRepository
         }
     }
 
+
+    /**
+     * @param int $id
+     * @return Categorie|null
+     * @throws Exception
+     */
     public function read(int $id): Categorie | null
     {
         try {
@@ -59,6 +79,11 @@ class CategorieRepository
         }
     }
 
+
+    /**
+     * @param Categorie $categorie
+     * @throws PDOException
+     */
     public function update(Categorie $categorie): void
     {
         try {
@@ -74,6 +99,11 @@ class CategorieRepository
         }
     }
 
+
+    /**
+     * @param int $id
+     * @throws PDOException
+     */
     public function delete(int $id): void
     {
         try {
@@ -85,6 +115,11 @@ class CategorieRepository
         }
     }
 
+
+    /**
+     * @return array
+     * @throws Exception
+     */
     public function findAll(): array
     {
         try {
@@ -96,13 +131,19 @@ class CategorieRepository
         }
     }
 
+
+    /**
+     * @param array $criteria
+     * @return array
+     * @throws Exception
+     */
     public function findBy(array $criteria): array
     {
         try {
             $sql = "SELECT * FROM categorie";
             // search criteria
             if (isset($criteria['search'])) {
-                $sql .=  " WHERE " . implode(" AND ", array_map(fn($key) => "$key = :$key", array_keys($criteria['criteria'])));
+                $sql .=  " WHERE " . implode(" AND ", array_map(fn($key) => "$key = :$key", array_keys($criteria['search'])));
             }
             // order
             if (isset($criteria['order'])) {
