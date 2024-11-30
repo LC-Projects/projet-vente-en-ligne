@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-6 pt-5 mt-5">
                     <h2 class="display-1 ls-1">
-                        <span class="fw-bold text-primary">VET</span>
+                        <span class="fw-bold text-primary">VEL</span>
                         Tout vos produits en
                         <span class="fw-bold">un clic</span>
                     </h2>
@@ -212,13 +212,16 @@
                         class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
 
                         <!-- TODO: Produits : Foreach -->
-                        <?php foreach ($produits as $produit) : ?>
+                        <?php foreach ($produits as $index => $produit) : ?>
 							<div class="col">
                             <div class="product-item">
                                 <figure>
                                     <a href="/produit?id=<?= $produit['id'] ?>" title="Product Title">
-                                        <img src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/05856ac7-0129-4395-bd6e-2fe2669025fb/custom-nike-dunk-low-by-you-su24.png" alt="Product Thumbnail" class="tab-image" width="240px">
+                                        <img src="<?= $imagesProduitPlaceHolder[$index] ?>" alt="Product Thumbnail" class="tab-image" width="240px">
                                     </a>
+                                    <!-- <a href="/produit?id=<?= $produit['id'] ?>" title="Product Title">
+                                        <img src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/05856ac7-0129-4395-bd6e-2fe2669025fb/custom-nike-dunk-low-by-you-su24.png" alt="Product Thumbnail" class="tab-image" width="240px">
+                                    </a> -->
                                 </figure>
                                 <div class="d-flex flex-column text-center">
                                     <h3 class="fs-6 fw-normal"><?= $produit['nom'] ?></h3>

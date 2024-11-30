@@ -18,8 +18,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="../../public/css/vendor.css">
-    <link rel="stylesheet" type="text/css" href="./../public/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -337,38 +337,48 @@
         <div class="offcanvas-body">
             <div class="order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Your cart</span>
+                    <span class="text-primary">Votre panier</span>
+
+                    <!-- TODO: Panier: Quantité -->
                     <span class="badge bg-primary rounded-pill">3</span>
                 </h4>
+
+                <!-- TODO: Panier: Produits -->
                 <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0">Growers cider</h6>
-                            <small class="text-body-secondary">Brief description</small>
+                            <h6 class="my-0">Cidre de producteur</h6>
+                            <small class="text-body-secondary">
+                                Cidre brut de producteur local
+                            </small>
                         </div>
-                        <span class="text-body-secondary">$12</span>
+                        <span class="text-body-secondary">12 €</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0">Fresh grapes</h6>
-                            <small class="text-body-secondary">Brief description</small>
+                            <h6 class="my-0">Raisins frais</h6>
+                            <small class="text-body-secondary">
+                                Raidins frais de saison
+                            </small>
                         </div>
-                        <span class="text-body-secondary">$8</span>
+                        <span class="text-body-secondary">8 €</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">Heinz tomato ketchup</h6>
-                            <small class="text-body-secondary">Brief description</small>
+                            <small class="text-body-secondary">
+                                Ketchup Heinz 570g
+                            </small>
                         </div>
-                        <span class="text-body-secondary">$5</span>
+                        <span class="text-body-secondary">5 €</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong>$20</strong>
+                        <span>Total (EUR)</span>
+                        <strong>20 €</strong>
                     </li>
                 </ul>
 
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Passer à la caisse</button>
             </div>
         </div>
     </div>
@@ -390,7 +400,9 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#fruits"></use>
                         </svg>
-                        <span>Fruits and vegetables</span>
+                        <span>
+                            Fruits et Légumes
+                        </span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -398,7 +410,9 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#dairy"></use>
                         </svg>
-                        <span>Dairy and Eggs</span>
+                        <span>
+                        Produits laitiers et œufs
+                        </span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -406,7 +420,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#meat"></use>
                         </svg>
-                        <span>Meat and Poultry</span>
+                        <span>Viande et volaille</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -414,7 +428,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#seafood"></use>
                         </svg>
-                        <span>Seafood</span>
+                        <span>Fruits de mer</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -422,7 +436,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#bakery"></use>
                         </svg>
-                        <span>Bakery and Bread</span>
+                        <span>Pâtisserie et boulangerie</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -430,7 +444,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#canned"></use>
                         </svg>
-                        <span>Canned Goods</span>
+                        <span>Produits en conserve</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -438,7 +452,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#frozen"></use>
                         </svg>
-                        <span>Frozen Foods</span>
+                        <span>Produits surgelés</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -446,7 +460,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#pasta"></use>
                         </svg>
-                        <span>Pasta and Rice</span>
+                        <span>Pâtes et riz</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -454,7 +468,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#breakfast"></use>
                         </svg>
-                        <span>Breakfast Foods</span>
+                        <span>Aliments pour petit-déjeuner</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -462,7 +476,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#snacks"></use>
                         </svg>
-                        <span>Snacks and Chips</span>
+                        <span>Collations et chips</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -473,15 +487,15 @@
                             <svg width="24" height="24" viewBox="0 0 24 24">
                                 <use xlink:href="#beverages"></use>
                             </svg>
-                            <span>Beverages</span>
+                            <span>Boissons</span>
                         </div>
                     </button>
                     <div class="collapse" id="beverages-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal ps-5 pb-1">
-                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Water</a></li>
-                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Juice</a></li>
+                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Eau</a></li>
+                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Jus</a></li>
                             <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Soda</a></li>
-                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Tea</a></li>
+                            <li class="border-bottom py-2"><a href="index.html" class="dropdown-item">Thé</a></li>
                         </ul>
                     </div>
                 </li>
@@ -490,7 +504,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#spices"></use>
                         </svg>
-                        <span>Spices and Seasonings</span>
+                        <span>Épices et assaisonnements</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -498,7 +512,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#baby"></use>
                         </svg>
-                        <span>Baby Food and Formula</span>
+                        <span>Aliments pour bébés et préparations pour nourrissons</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -506,7 +520,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#health"></use>
                         </svg>
-                        <span>Health and Wellness</span>
+                        <span>Santé et bien-être</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -514,7 +528,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#household"></use>
                         </svg>
-                        <span>Household Supplies</span>
+                        <span>Produits ménagers</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -522,7 +536,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#personal"></use>
                         </svg>
-                        <span>Personal Care</span>
+                        <span>Soins personnels</span>
                     </a>
                 </li>
                 <li class="nav-item border-dashed">
@@ -530,7 +544,7 @@
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlink:href="#pet"></use>
                         </svg>
-                        <span>Pet Food and Supplies</span>
+                        <span>Aliments et fournitures pour animaux de compagnie</span>
                     </a>
                 </li>
             </ul>
@@ -547,7 +561,7 @@
                     class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
                     <div class="d-flex align-items-center my-3 my-sm-0">
                         <a href="index.html">
-                            <img src="assets/logo.png" alt="logo" height="44px" width="auto" style="scale: 1.5">
+                            <img src="./assets/logo.png" alt="logo" height="44px" width="auto" style="scale: 1.5">
                         </a>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -562,16 +576,16 @@
                     <div class="search-bar row bg-light p-2 rounded-4">
                         <div class="col-md-4 d-none d-md-block">
                             <select class="form-select border-0 bg-transparent">
-                                <option>All Categories</option>
-                                <option>Groceries</option>
-                                <option>Drinks</option>
-                                <option>Chocolates</option>
+                                <option>Toutes catégories</option>
+                                <option>Épicerie</option>
+                                <option>Boissons</option>
+                                <option>Chocolats</option>
                             </select>
                         </div>
                         <div class="col-11 col-md-7">
                             <form id="search-form" class="text-center" action="index.html" method="post">
                                 <input type="text" class="form-control border-0 bg-transparent"
-                                    placeholder="Search for more than 20,000 products">
+                                    placeholder="Recherche dans plus de 20 000 produits">
                             </form>
                         </div>
                         <div class="col-1">
@@ -587,11 +601,11 @@
                     <ul
                         class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
                         <li class="nav-item active">
-                            <a href="index.html" class="nav-link">Home</a>
+                            <a href="index.html" class="nav-link">Accueil</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle pe-3" role="button" id="pages" data-bs-toggle="dropdown"
-                                aria-expanded="false">Pages</a>
+                                aria-expanded="false">VEL</a>
                             <ul class="dropdown-menu border-0 p-3 rounded-0 shadow" aria-labelledby="pages">
                                 <li><a href="index.html" class="dropdown-item">A propos</a></li>
                                 <li><a href="index.html" class="dropdown-item">Boutique</a></li>
